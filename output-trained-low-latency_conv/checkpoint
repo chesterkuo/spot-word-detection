@@ -1,0 +1,6 @@
+model_checkpoint_path: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-260000"
+all_model_checkpoint_paths: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-259600"
+all_model_checkpoint_paths: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-259700"
+all_model_checkpoint_paths: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-259800"
+all_model_checkpoint_paths: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-259900"
+all_model_checkpoint_paths: "/sdc1/git/tensorflow-v1.4-speech-example/output-trained-low-latency_conv/low_latency_conv.ckpt-260000"

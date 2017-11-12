@@ -1,0 +1,1 @@
+python tensorflow/tensorflow/examples/speech_commands/freeze.py --start_checkpoint=./output-trained-low-latency_conv/low_latency_conv.ckpt-260000 --output_file=./output-trained-low-latency_conv/low_latency_conv_frozen_260000_graph.pb --model_architecture=low_latency_conv
