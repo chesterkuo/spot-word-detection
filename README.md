@@ -1,31 +1,17 @@
-chester@chester-nuc1:/sda/virtualenv$ virtualenv tensorflow-v1.4.0
+Here is repository and example to use Tensorflow framework for KeyWord detection
+[ Based on idea of https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/speech_commands ]
+
+(A) Create virtualenv of python, this can help us to use package we only needs.
+
+$ virtualenv tensorflow-v1.4.0
 New python executable in /sda/virtualenv/tensorflow-v1.4.0/bin/python
 Installing setuptools, pip, wheel...done.
-chester@chester-nuc1:/sda/virtualenv$ source tensorflow-v1.4.0/
--bash: source: tensorflow-v1.4.0/: is a directory
-chester@chester-nuc1:/sda/virtualenv$ source tensorflow-v1.4.0/bin/activate
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/virtualenv$ ls
-tensorflow-v1.4.0
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/virtualenv$ pip list
-DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
-pip (9.0.1)
-setuptools (36.7.1)
-wheel (0.30.0)
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/virtualenv$ pip list --format=columns
-Package    Version
----------- -------
-pip        9.0.1
-setuptools 36.7.1
-wheel      0.30.0
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/virtualenv$ pip install tensorflow-v1.4.0
-Collecting tensorflow-v1.4.0
-  Could not find a version that satisfies the requirement tensorflow-v1.4.0 (from versions: )
-No matching distribution found for tensorflow-v1.4.0
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/virtualenv$ pip install tensorflow
+$ source tensorflow-v1.4.0/bin/activate
+(tensorflow-v1.4.0)$ pip install tensorflow
 Collecting tensorflow
   Downloading tensorflow-1.4.0-cp27-cp27mu-manylinux1_x86_64.whl (40.7MB)
-
   
+$ pip list --format=columns
 Package                Version
 ---------------------- ---------
 backports.weakref      1.0.post1
@@ -48,7 +34,7 @@ Werkzeug               0.12.2
 wheel                  0.30.0
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ git clone https://github.com/tensorflow/tensorflow.git
+(tensorflow-v1.4.0) $ git clone https://github.com/tensorflow/tensorflow.git
 Cloning into 'tensorflow'...
 remote: Counting objects: 260227, done.
 remote: Compressing objects: 100% (4/4), done.
@@ -56,19 +42,19 @@ remote: Total 260227 (delta 29), reused 29 (delta 29), pack-reused 260194
 Receiving objects: 100% (260227/260227), 130.73 MiB | 9.18 MiB/s, done.
 Resolving deltas: 100% (203118/203118), done.
 Checking connectivity... done.
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ls
-tensorflow
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ cd tensorflow/
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0/tensorflow$ git checkout -b v1.4.0
+(tensorflow-v1.4.0) $ cd tensorflow/
+(tensorflow-v1.4.0) $ git checkout -b v1.4.0
 Switched to a new branch 'v1.4.0'
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0/tensorflow$ git branch
+(tensorflow-v1.4.0) $ git branch
   master
 * v1.4.0
 
+
+(B) Install Bazel package, skip this if you don't need to build tensorflow program or package yourslef,
 https://docs.bazel.build/versions/master/install-ubuntu.html
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/bazel$ ./bazel-0.6.1-installer-linux-x86_64.sh --user
+(tensorflow-v1.4.0) $ ./bazel-0.6.1-installer-linux-x86_64.sh --user
 Bazel installer
 ---------------
 
@@ -111,26 +97,11 @@ completion by adding the following line to your ~/.bashrc:
   source /home/chester/.bazel/bin/bazel-complete.bash
 
 See http://bazel.build/docs/getting-started.html to start a new project!
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/bazel$ ls -l /home/chester/bin
-total 0
-lrwxrwxrwx 1 chester chester 30 十一 11 21:29 bazel -> /home/chester/.bazel/bin/bazel
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/bazel$ vi ~/.bashrc
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/bazel$ deactivate
-chester@chester-nuc1:/sda/git/bazel$ source ~/.bashrc
-chester@chester-nuc1:/sda/git/bazel$ cd /sd
-sda/  sdb2/
-chester@chester-nuc1:/sda/git/bazel$ source /sda/virtualenv/tensorflow-v1.4.0/bin/activate
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ls -al
-total 16
-drwxrwxr-x 3 chester chester 4096 十一 11 21:37 .
-drwxrwxr-x 5 chester chester 4096 十一 11 21:31 ..
--rwxr-xr-x 1 chester chester  375 十一 11 21:37 run-train-with-mode-low_latency_conv-withwant-words.sh
-drwxrwxr-x 7 chester chester 4096 十一 11 21:20 tensorflow
+(C) Train tensorflow with speech Dataset
 
-
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-train-with-mode-low_latency_conv-withwant-words.sh
+(tensorflow-v1.4.0) $ ./run-train-with-mode-low_latency_conv.sh
 2017-11-11 21:38:48.455364: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
 >> Downloading speech_commands_v0.01.tar.gz 100.0%
 INFO:tensorflow:Successfully downloaded speech_commands_v0.01.tar.gz (1488293908 bytes)
@@ -144,23 +115,13 @@ INFO:tensorflow:Step #3: rate 0.010000, accuracy 27.0%, cross entropy 1.610142
 INFO:tensorflow:Step #4: rate 0.010000, accuracy 28.0%, cross entropy 1.609196
 INFO:tensorflow:Step #5: rate 0.010000, accuracy 25.0%, cross entropy 1.608746
 INFO:tensorflow:Step #6: rate 0.010000, accuracy 28.0%, cross entropy 1.608680
-INFO:tensorflow:Step #7: rate 0.010000, accuracy 23.0%, cross entropy 1.607584
-INFO:tensorflow:Step #8: rate 0.010000, accuracy 24.0%, cross entropy 1.608709
-INFO:tensorflow:Step #9: rate 0.010000, accuracy 25.0%, cross entropy 1.607460
-INFO:tensorflow:Step #10: rate 0.010000, accuracy 26.0%, cross entropy 1.605890
-INFO:tensorflow:Step #11: rate 0.010000, accuracy 25.0%, cross entropy 1.606002
-INFO:tensorflow:Step #12: rate 0.010000, accuracy 26.0%, cross entropy 1.604032
 INFO:tensorflow:Step #13: rate 0.010000, accuracy 32.0%, cross entropy 1.605930
 
 
-  (tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-freeze-with-mode-low_latency_conv.sh
-2017-11-12 22:35:02.468222: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
-Converted 8 variables to const ops.
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ls output-trained-low-latency_conv/
-checkpoint                                        low_latency_conv.ckpt-260000.meta        low_latency_conv.pbtxt
-low_latency_conv.ckpt-260000.data-00000-of-00001  low_latency_conv_frozen_260000_graph.pb
-low_latency_conv.ckpt-260000.index                low_latency_conv_labels.txt
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ls -lh output-trained-low-latency_conv/
+
+(D) After network be trained, it will generate file include meta graph, checkpoint and variables under folder name ,"output-trained-low-latency_conv", then try to freeze the network to pb file.
+
+(tensorflow-v1.4.0) $ ls -lh output-trained-low-latency_conv/
 total 7.5M
 -rw-rw-r-- 1 chester chester  787 十一 12 22:34 checkpoint
 -rw-rw-r-- 1 chester chester 3.7M 十一 12 22:34 low_latency_conv.ckpt-260000.data-00000-of-00001
@@ -170,39 +131,40 @@ total 7.5M
 -rw-rw-r-- 1 chester chester   60 十一 12 22:34 low_latency_conv_labels.txt
 -rw-rw-r-- 1 chester chester 140K 十一 12 22:34 low_latency_conv.pbtxt
 
+ (tensorflow-v1.4.0) $ ./run-freeze-with-mode-low_latency_conv.sh
+2017-11-12 22:35:02.468222: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+Converted 8 variables to const ops.
 
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-inference.sh ./download-speech-data/left/6f342826_nohash_0.wav
+(E) Run inference with specific wav file, wav file need to be with 16000 sample rate, single channel, PCM
+
+(tensorflow-v1.4.0) $ ./run-inference.sh ./download-speech-data/left/6f342826_nohash_0.wav
 2017-11-12 22:43:42.029269: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
 left (score = 0.88148)
 right (score = 0.11090)
 _unknown_ (score = 0.00413)
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-inference.sh ./download-speech-data/left/6f342826_nohash_0.wav
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-inference.sh ./download-speech-data/yes/39a12648_nohash_0.wav
+(tensorflow-v1.4.0) $ ./run-inference.sh ./download-speech-data/yes/39a12648_nohash_0.wav
 2017-11-12 22:44:26.503044: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
 yes (score = 0.85850)
 no (score = 0.09289)
 down (score = 0.04094)
 
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow-v1.4.0$ ./run-inference.sh ./download-speech-data/sheila/d37e4bf1_nohash_0.wav
+(tensorflow-v1.4.0) $ ./run-inference.sh ./download-speech-data/sheila/d37e4bf1_nohash_0.wav
 2017-11-12 22:44:49.766790: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
 _unknown_ (score = 0.99235)
 stop (score = 0.00346)
 yes (score = 0.00319)
 
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow$ ./run-inference.sh ./myrecord-yes.wav
-2017-11-12 23:25:28.974108: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
-yes (score = 0.72387)
-left (score = 0.22761)
 
-
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow$ ./run-kwd.sh ./myrecord-yes.wav yes
+(F) Use python to detect specific words you want to check of wav file, please keep in mind , the keyword list need to be in trainning dataset. 
+(tensorflow-v1.4.0) $ ./run-kwd.sh ./myrecord-yes.wav yes
 2017-11-12 23:25:46.077154: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
  kwd matched
-(tensorflow-v1.4.0) chester@chester-nuc1:/sda/git/tensorflow$ ./run-kwd.sh ./myrecord-yes.wav no
+
+(tensorflow-v1.4.0) $ ./run-kwd.sh ./myrecord-yes.wav no
 2017-11-12 23:25:52.996674: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
 
