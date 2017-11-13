@@ -12,19 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-r"""Runs a trained audio graph against a WAVE file and reports the results.
+r"""Runs a trained audio graph against a WAVE file with keyword specific 
 
 The model, labels and .wav file specified in the arguments will be loaded, and
 then the predictions from running the model against the audio data will be
 printed to the console. This is a useful script for sanity checking trained
 models, and as an example of how to use an audio model from Python.
 
-Here's an example of running it:
-
-python tensorflow/examples/speech_commands/label_wav.py \
---graph=/tmp/my_frozen_graph.pb \
---labels=/tmp/speech_commands_train/conv_labels.txt \
---wav=/tmp/speech_dataset/left/a5d485dc_nohash_0.wav
 
 """
 from __future__ import absolute_import
