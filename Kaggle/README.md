@@ -1,6 +1,7 @@
+#Kaggle submit script
+Download test dataset from Kaggle , and decompress it under test folder.
 
-Download test dataset from Kaggle , and decompress it under test folder
-Structure looks like following,
+Structure folder looks like following,
 
 test/audio/clip_497909fb1.wav
 test/audio/clip_ff7109fa3.wav
